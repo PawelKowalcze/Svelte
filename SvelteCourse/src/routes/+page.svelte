@@ -1,6 +1,7 @@
 
 <script lang="ts">
     import Header from "./Header.svelte";
+    import {fly} from 'svelte/transition';
    //  let name = $state('Pawel1');
    //  // let name = "Pawel";
    //  let status: 'OPEN' | 'CLOSED' = $state('OPEN');
@@ -87,11 +88,14 @@
 
     {#each Questions as question, index (question.id)}
         {#if formState.step === index}
-            {@render formStep(question)}
-            {/if}
+<!--            <div transition:fly={{ x: 200, duration: 200, opacity: 0}}>-->
+            <div in:fly={{ x: 200, duration: 200, opacity: 0, delay: 200}}
+                 out:fly={{ x: -200, duration: 200, opacity: 0}}>
+                {@render formStep(question)}
+            </div>
+        {/if}
     {/each}
-
-
+<!--    Check animations in svelte  / transition    -->
 <!--Instead of this i am doing it by snippet-->
     <!--{#if formState.step === 0}-->
     <!--    <div>-->
